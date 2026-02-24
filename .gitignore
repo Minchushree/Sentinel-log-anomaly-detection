@@ -1,0 +1,42 @@
+# Virtual Environment
+sentinel_env/
+venv/
+env/
+*.venv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime
+*.log
+data/access.log
+dashboard/metrics.json
+logs/*.txt
+
+# Large files
+*.pkl
+*.pickle
+model/anomaly_model.pkl
+
+# Temporary
+.temp/
+tmp/
+.env
