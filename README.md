@@ -1,14 +1,16 @@
 # 🛡️ Sentinel - Real-Time Log Anomaly Detection
+Sentinel is a real-time security monitoring system that detects web attacks and anomalous behavior in HTTP logs using a hybrid approach: rule-based signatures + Machine Learning.
 
-A simple security monitoring system that finds suspicious activities in your logs automatically.
+It includes a live Flask dashboard, multi-stage attack detection, severity scoring, and Slack alert integration.
+
 
 ## What It Does
 
-- **Detects Attacks** - Spots SQL Injection, XSS, Path Traversal, and other common attacks
-- **Machine Learning** - Uses an AI model to find unusual patterns in logs
-- **Real-Time Alerts** - Notifies you on Slack when something suspicious happens
-- **Live Dashboard** - See your security metrics in a web browser
-- **Tracks Patterns** - Learns which IPs and endpoints are most problematic
+- **Detects Attacks** - Spots SQL Injection, XSS, Path Traversal, and other common attacks.
+- **Machine Learning** - Uses an AI model to find unusual patterns in logs.
+- **Real-Time Alerts** - Notifies you on Slack when something suspicious happens.
+- **Live Dashboard** - See your security metrics in a web browser.
+- **Tracks Patterns** - Learns which IPs and endpoints are most problematic.
 
 ## Setup (First Time Only)
 
@@ -47,15 +49,9 @@ Generate fake attacks to see the system in action:
 sentinel_env\Scripts\Activate.ps1
 python test_attacks.py
 ```
+### Slack Alerts (Optional)
+Sentinel now uses the Slack Web API via a bot token instead of a simple incoming webhook.
 
-## Dashboard Metrics
-
-Your dashboard displays:
-- **Total Logs** - Number of log lines processed
-- **Anomalies Found** - Count of suspicious activities detected
-- **Anomaly Rate** - Percentage of logs classified as anomalies
-- **Attack Types** - Breakdown of detected attacks (SQL Injection, XSS, etc)
-- **Real-Time Charts** - Visual timeline of anomalies over time
 
 ## How It Works
 
@@ -68,44 +64,44 @@ Your dashboard displays:
 5. **Alerts** - Sends notifications to Slack with attack details (optional)
 6. **Dashboard** - Updates real-time metrics and charts
 
-## Configuration
 
-### Log File Path
-Edit `main.py` and change:
-```python
-LOG_PATH = "data/access.log"  # Change to your log file
-```
+   ## 📊Dashboard Metrics
 
-### Slack Alerts (Optional)
-Sentinel now uses the Slack Web API via a bot token instead of a simple incoming webhook.
+Your dashboard displays:
+- **Total Logs** - Number of log lines processed.
+- **Anomalies Found** - Count of suspicious activities detected.
+- **Anomaly Rate** - Percentage of logs classified as anomalies.
+- **Attack Types** - Breakdown of detected attacks (SQL Injection, XSS, etc).
+- **Real-Time Charts** - Visual timeline of anomalies over time.
 
-1. Create a Slack app and bot token (see https://api.slack.com/authentication/basics).
-2. Provide your bot token as an environment variable named `SLACK_TOKEN`.
+  ## Includes:
 
-On Windows PowerShell you can set it for the session:
+Total Logs Processed 
+ | Anomalies Detected 
+ | Anomaly Rate 
+ | Logs Over Time
+ | Attack Type Distribution
+ | Severity Distribution
+ | Multi-Stage Attack Sequences
+ | Attack Timeline & Trend Analysis
+ | Top Attacking IPs
+ | Most Targeted Endpoints
+ | Brute Force Monitoring
 
-```powershell
-$env:SLACK_TOKEN = "xoxb-...your-bot-token..."
-```
+## 🖥️Dashboard Preview
 
-Or create a `.env` file in the project root containing:
+![Main Dashboard](assets/main_dashboard.png)
 
-```
-SLACK_TOKEN=xoxb-...your-bot-token...
-```
+![Advanced Dashboard](assets/advanced_dashboard.png)
 
-3. Configure which channel the bot posts to by editing `sentinel/slack_alert.py` and updating the `CHANNEL` variable (default: `#new-channel`).
+![Attack Distribution](assets/attack_distribution.png)
 
-Where to see alerts:
-- Slack: the configured channel will receive alert messages from the bot.
-- Terminal: `main.py` prints Slack errors and debug output to the console (useful if delivery fails).
-- Dashboard: the dashboard at `http://localhost:5000` shows metrics and anomalies in near real-time.
+![Multi-Stage Attack](assets/multistage_attack.png)
 
-Notes:
-- The current `sentinel/slack_alert.py` prints the token on import for debugging and sends a short test alert when imported; you may see a "test alert from sentinel" message in the configured channel when `main.py` starts. Remove those lines if undesired.
-- If Slack delivery fails, errors are printed to the terminal running `main.py` so you can inspect failure reasons.
+![Slack Alert](assets/slack_alert.png)
 
-## Project Structure
+
+## 📂Project Structure
 
 ```
 Sentinel_project/
