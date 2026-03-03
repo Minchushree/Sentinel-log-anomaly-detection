@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import time
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
@@ -5,8 +8,8 @@ from slack_sdk.errors import SlackApiError
 import os
 
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
-CHANNEL = "C0AAQ690FDK"
-
+CHANNEL = "#new-channel"
+print("TOKEN:", SLACK_TOKEN)
 client = WebClient(token=SLACK_TOKEN)
 
 LAST_ALERT_TIME = 0
@@ -30,3 +33,4 @@ def send_alert(message):
 
     except SlackApiError as e:
         print("⚠️ Slack alert failed:", e.response["error"])
+send_alert("test alert from sentinel")

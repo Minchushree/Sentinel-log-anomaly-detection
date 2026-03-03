@@ -77,11 +77,33 @@ LOG_PATH = "data/access.log"  # Change to your log file
 ```
 
 ### Slack Alerts (Optional)
-1. Create a Slack webhook at: https://api.slack.com/messaging/webhooks
-2. Edit `sentinel/slack_alert.py` and set:
-```python
-SLACK_WEBHOOK = "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+Sentinel now uses the Slack Web API via a bot token instead of a simple incoming webhook.
+
+1. Create a Slack app and bot token (see https://api.slack.com/authentication/basics).
+2. Provide your bot token as an environment variable named `SLACK_TOKEN`.
+
+On Windows PowerShell you can set it for the session:
+
+```powershell
+$env:SLACK_TOKEN = "xoxb-...your-bot-token..."
 ```
+
+Or create a `.env` file in the project root containing:
+
+```
+SLACK_TOKEN=xoxb-...your-bot-token...
+```
+
+3. Configure which channel the bot posts to by editing `sentinel/slack_alert.py` and updating the `CHANNEL` variable (default: `#new-channel`).
+
+Where to see alerts:
+- Slack: the configured channel will receive alert messages from the bot.
+- Terminal: `main.py` prints Slack errors and debug output to the console (useful if delivery fails).
+- Dashboard: the dashboard at `http://localhost:5000` shows metrics and anomalies in near real-time.
+
+Notes:
+- The current `sentinel/slack_alert.py` prints the token on import for debugging and sends a short test alert when imported; you may see a "test alert from sentinel" message in the configured channel when `main.py` starts. Remove those lines if undesired.
+- If Slack delivery fails, errors are printed to the terminal running `main.py` so you can inspect failure reasons.
 
 ## Project Structure
 
